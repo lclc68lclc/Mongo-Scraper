@@ -74,7 +74,7 @@ app.get("/scrape", function(req, res) {
 
             var entry = new Article(result);
 
-            etry.save(function(err, doc) {
+            entry.save(function(err, doc) {
                 if (err) {
                     console.log(err);
                 } else {
