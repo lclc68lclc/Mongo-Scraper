@@ -61,16 +61,16 @@ app.get("/saved", function(req, res) {
 });
 
 app.get("/scrape", function(req, res) {
-    request("https://www.lifehacker.com/", function(error, response, html) {
+    request("https://www.nytimes.com/", function(error, response, html) {
 
         var $ = cheerio.load(html);
 
         $("article").each(function(i, element) {
             var result = {};
 
-            result.title = $(this).children("h1").text();
+            result.title = $(this).children("a").text();
             result.summary = $(this).children(".summary").text();
-            result.link = $(this).children("h1").children("a").attr("href");
+            result.link = $(this).children("a").attr("href");
 
             var entry = new Article(result);
 
