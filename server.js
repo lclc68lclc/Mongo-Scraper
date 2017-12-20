@@ -27,9 +27,15 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/scrapeddb", {
-    useMongoClient: true
-});
+
+//Define db connection with envs
+var databaseUri = 'mongodb://localhost/scrapeddb';
+
+if (process.env.MONGODB_URI) {
+    mongoose.connect(process.env.MONGODB_URI);
+} else {
+    mongoose.connect(databaseUri);
+}
 
 var db = mongoose.connection;
 
